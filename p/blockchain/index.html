@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='使用JavaScript描述了一个简单的区块链'>
+<title>使用JavaScript描述一个基本的区块链</title>
+
+<link rel='canonical' href='https://patrick9527.github.io/p/blockchain/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='使用JavaScript描述一个基本的区块链'>
+<meta property='og:description' content='使用JavaScript描述了一个简单的区块链'>
+<meta property='og:url' content='https://patrick9527.github.io/p/blockchain/'>
+<meta property='og:site_name' content='Hugo Theme Stack Starter'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Example Tag' /><meta property='article:published_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='og:image' content='https://patrick9527.github.io/p/blockchain/cover.jpg' />
+<meta name="twitter:title" content="使用JavaScript描述一个基本的区块链">
+<meta name="twitter:description" content="使用JavaScript描述了一个简单的区块链"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://patrick9527.github.io/p/blockchain/cover.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Hugo Theme Stack Starter</a></h1>
+            <h2 class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#创造一个区块">创造一个区块</a></li>
+    <li><a href="#创造一个链">创造一个链</a></li>
+    <li><a href="#heading"></a></li>
+    <li><a href="#试用">试用</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#什么是pow">什么是POW</a></li>
+    <li><a href="#实现pow">实现POW</a></li>
+    <li><a href="#修改区块链">修改区块链</a></li>
+    <li><a href="#测试">测试</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#重构区块类">重构区块类</a></li>
+    <li><a href="#交易类">交易类</a></li>
+    <li><a href="#调整我们的区块链">调整我们的区块链</a></li>
+    <li><a href="#挖矿">挖矿</a></li>
+    <li><a href="#地址的余额">地址的余额</a></li>
+    <li><a href="#测试-1">测试</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/blockchain/">
+                <img src="/p/blockchain/cover_hud7e36f7e20e71be184458283bdae4646_55974_800x0_resize_q75_box.jpg"
+                        srcset="/p/blockchain/cover_hud7e36f7e20e71be184458283bdae4646_55974_800x0_resize_q75_box.jpg 800w, /p/blockchain/cover_hud7e36f7e20e71be184458283bdae4646_55974_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="534" 
+                        loading="lazy"
+                        alt="Featured image of post 使用JavaScript描述一个基本的区块链" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/example-category/" style="background-color: #2a9d8f; color: #fff;">
+                Example Category
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/blockchain/">使用JavaScript描述一个基本的区块链</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            使用JavaScript描述了一个简单的区块链
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 06, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="实现一个基本的区块链">实现一个基本的区块链</h1>
+<h2 id="创造一个区块">创造一个区块</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">SHA256</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;crypto-js/sha256&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Block</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">timestamp</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">previousHash</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">=</span> <span class="nx">previousHash</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">timestamp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">calculateHash</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">calculateHash</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">SHA256</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">index</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">)).</span><span class="nx">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>定义了一个构造函数来初始化我区块的属性。每一个区块上都被赋予了<code>index</code>属性来告知我们这个区块在整个链上的位置。我们同时也生成了一个时间戳，以及需要在区块里存储的一些数据。最后是前一个区块的hash。</p>
+<h2 id="创造一个链">创造一个链</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Blockchain</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">chain</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">createGenesisBlock</span><span class="p">()];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">createGenesisBlock</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">new</span> <span class="nx">Block</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&#34;01/01/2017&#34;</span><span class="p">,</span> <span class="s2">&#34;Genesis block&#34;</span><span class="p">,</span> <span class="s2">&#34;0&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">getLatestBlock</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">addBlock</span><span class="p">(</span><span class="nx">newBlock</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">newBlock</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getLatestBlock</span><span class="p">().</span><span class="nx">hash</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">newBlock</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="nx">newBlock</span><span class="p">.</span><span class="nx">calculateHash</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newBlock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">isChainValid</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">currentBlock</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">previousBlock</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">[</span><span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">currentBlock</span><span class="p">.</span><span class="nx">hash</span> <span class="o">!==</span> <span class="nx">currentBlock</span><span class="p">.</span><span class="nx">calculateHash</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">currentBlock</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">!==</span> <span class="nx">previousBlock</span><span class="p">.</span><span class="nx">hash</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在构造函数里，我通过创建一个包含创世块的数组来初始化整个链。第一个区块是特殊的，因为它不能指向前一个区块。我还添加了下面两个方法：</p>
+<ul>
+<li><code>getLatestBlock()</code>返回我们区块链上最新的区块。</li>
+<li><code>addBlock()</code>负责将新的区块添加到我们的链上。为此，我们将前一个区块的hash添加到我们新的区块中。这样我们就可以保持整个链的完整性。因为只要我们变更了最新区块的内容，我们就需要重新计算它的hash。当计算完成后，我将把这个区块推进链里（一个数组）。</li>
+</ul>
+<p>最后，我创建一个<code>isChainValid()</code>来确保没有人篡改过区块链。它会遍历所有的区块来检查每个区块的hash是否正确。它会通过比较<code>previousHash</code>来检查每个区块是否指向正确的上一个区块。如果一切都没有问题它会返回<code>true</code>否则会返回<code>false</code>。</p>
+<h2 id="heading"></h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">savjeeCoin</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blockchain</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">addBlock</span><span class="p">(</span><span class="k">new</span> <span class="nx">Block</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;20/07/2017&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">amount</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}));</span>
+</span></span><span class="line"><span class="cl"><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">addBlock</span><span class="p">(</span><span class="k">new</span> <span class="nx">Block</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;20/07/2017&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">amount</span><span class="o">:</span> <span class="mi">8</span> <span class="p">}));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="试用">试用</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 检查是否有效(将会返回true)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Blockchain valid? &#39;</span> <span class="o">+</span> <span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">isChainValid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 现在尝试操作变更数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">chain</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">amount</span><span class="o">:</span> <span class="mi">100</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 再次检查是否有效 (将会返回false)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Blockchain valid? &#34;</span> <span class="o">+</span> <span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">isChainValid</span><span class="p">());</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="实现powproof-of-work工作量证明">实现POW（proof-of-work工作量证明）</h1>
+<h2 id="什么是pow">什么是POW</h2>
+<p>POW是在第一个区块链被创造之前就已经存在的一种机制。这是一项简单的技术，通过一定数量的计算来防止滥用。工作量是防止垃圾填充和篡改的关键。如果它需要大量的算力，那么填充垃圾就不再值得。
+比特币通过要求hash以特定0的数目来实现POW。这也被称之为<strong>难度</strong>
+不过等一下！一个区块的hash怎么可以改变呢？在比特币的场景下，一个区块包含有各种金融交易信息。我们肯定不希望为了获取正确的hash而混淆了那些数据。
+为了解决这个问题，区块链添加了一个<code>nonce</code>值。Nonce是用来查找一个有效Hash的次数。而且，因为无法预测hash函数的输出，因此在获得满足难度条件的hash之前，只能大量组合尝试。寻找到一个有效的hash（创建一个新的区块）在圈内称之为挖矿。
+在比特币的场景下，POW确保每10分钟只能添加一个区块。你可以想象垃圾填充者需要多大的算力来创造一个新区块，他们很难欺骗网络，更不要说篡改整个链。</p>
+<h2 id="实现pow">实现POW</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">constructor</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">timestamp</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">previousHash</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">=</span> <span class="nx">previousHash</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">timestamp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">calculateHash</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">nonce</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们还需要一个新的方法来增加Nonce，直到我们获得一个有效hash。强调一下，这是由难度决定的。所以我们会收到作为参数的难度。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">mineBlock</span><span class="p">(</span><span class="nx">difficulty</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">difficulty</span><span class="p">)</span> <span class="o">!==</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">difficulty</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&#34;0&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">nonce</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">calculateHash</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;BLOCK MINED: &#34;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后，我们还需要更改一下<code>calculateHash()</code>函数。因为目前他还没有使用Nonce来计算hash。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">calculateHash</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">SHA256</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">index</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">nonce</span>
+</span></span><span class="line"><span class="cl">  <span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将他们结合在一起，你会得到如下所示的区块类</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Block</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">timestamp</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">previousHash</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">=</span> <span class="nx">previousHash</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">timestamp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">calculateHash</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">nonce</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">calculateHash</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">SHA256</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">index</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">nonce</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">mineBlock</span><span class="p">(</span><span class="nx">difficulty</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">difficulty</span><span class="p">)</span> <span class="o">!==</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">difficulty</span> <span class="o">+</span> <span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s2">&#34;0&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">nonce</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">calculateHash</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;BLOCK MINED: &#34;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="修改区块链">修改区块链</h2>
+<p>现在，我们的区块已经拥有Nonce并且可以被开采了，我们还需要确保我们的区块链支持这种新的行为。让我们先在区块链中添加一个新的属性来跟踪整条链的难度。我会将它设置为2（这意味着区块的hash必须以2个0开头）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">chain</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">createGenesisBlock</span><span class="p">()];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">difficulty</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现在剩下要做的就是改变<code>addBlock()</code>方法，以便在将其添加到链中之前确保实际挖到该区块。下面我们将难度传给区块。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">addBlock</span><span class="p">(</span><span class="nx">newBlock</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">newBlock</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getLatestBlock</span><span class="p">().</span><span class="nx">hash</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">newBlock</span><span class="p">.</span><span class="nx">mineBlock</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">difficulty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newBlock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="测试">测试</h2>
+<p>现在让我们来测试一下我们的区块链，看看在POW下添加一个新区块会有什么效果。我将会使用之前的代码。我们将创建一个新的区块链实例然后往里添加2个区块。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">savjeeCoin</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blockchain</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Mining block 1&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">addBlock</span><span class="p">(</span><span class="k">new</span> <span class="nx">Block</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;20/07/2017&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">amount</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}));</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Mining block 2&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">addBlock</span><span class="p">(</span><span class="k">new</span> <span class="nx">Block</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&#34;20/07/2017&#34;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">amount</span><span class="o">:</span> <span class="mi">8</span> <span class="p">}));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果你运行了上面的代码，你会发现添加新区块依旧非常快。这是因为目前的难度只有2（或者你的电脑性能非常好）。
+如果你创建了一个难度为5的区块链实例，你会发现你的电脑会花费大概十秒钟来挖矿。随着难度的提升，你的防御攻击的保护程度越高。</p>
+<h1 id="交易与挖矿奖励">交易与挖矿奖励</h1>
+<p>在前面两部分我们创建了一个简单的区块链，并且加入了POW来抵御攻击。然而我们在途中也偷了懒：我们的区块链只能在一个区块中存储一笔交易，而且矿工没有奖励。现在，让我们解决这个问题！</p>
+<h2 id="重构区块类">重构区块类</h2>
+<p>现在一个区块拥有<code>index</code>,<code>previousHash</code>,<code>timestamp</code>,<code>data</code>,<code>hash</code>和<code>nonce</code>属性。这个<code>index</code>属性并不是很有用，事实上我甚至不知道为什么开始我要将它添加进去。所以我把它移除了，同时将<code>data</code>改名为<code>transactions</code>来更语义化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Block</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">,</span> <span class="nx">transactions</span><span class="p">,</span> <span class="nx">previousHash</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">=</span> <span class="nx">previousHash</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">timestamp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">transactions</span> <span class="o">=</span> <span class="nx">transactions</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">hash</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">calculateHash</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">nonce</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当我们改变区块类时，我们也必须更改<code>calculateHash()</code>函数。现在它还在使用老旧的<code>index</code>和<code>data</code>属性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">calculateHash</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">SHA256</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">previousHash</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">timestamp</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">transactions</span><span class="p">)</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">nonce</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="交易类">交易类</h2>
+<p>在区块内，我们将可以存储多笔交易。因此我们还需要定义一个交易类，一边我们可以锁定交易应当具有的属性：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Transaction</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(</span><span class="nx">fromAddress</span><span class="p">,</span> <span class="nx">toAddress</span><span class="p">,</span> <span class="nx">amount</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">fromAddress</span> <span class="o">=</span> <span class="nx">fromAddress</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">toAddress</span> <span class="o">=</span> <span class="nx">toAddress</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">amount</span> <span class="o">=</span> <span class="nx">amount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个交易例子非常的简单，仅仅包含了发起方（<code>fromAddress</code>）和接受方（<code>toAddress</code>）以及数量。如果有需求，你也可以在里面加入更多字段，不过这个只是为了最小实现。</p>
+<h2 id="调整我们的区块链">调整我们的区块链</h2>
+<p>当前的最大任务：调整我们的区块链来适应这些新变化。我们需要做的第一件事就是存储待处理交易的地方。
+正如你所知道的，由于POW，区块链可以稳定的创建区块。在比特币的场景下，难度被设置成大约每10分钟创建一个新区块。但是，是可以在创造两个区块之间提交新的交易。
+为了做到这一点，首先需要改变我们区块链的构造函数，以便他可以存储待处理的交易。我们还将创造一个新的属性，用于定义矿工获得多少钱作为奖励：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Blockchain</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">chain</span> <span class="o">=</span> <span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">createGenesisBlock</span><span class="p">()];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">difficulty</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 在区块产生之间存储交易的地方
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">pendingTransactions</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 挖矿回报
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">miningReward</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下一步，我们将调整我们的<code>addBlock()</code>方法。不过我的调整是指删掉并重写它！我们将不再允许人们直接为链上添加区块。相反，他们必须将交易添加至下一个区块中。而且我们将<code>addBlock()</code>更名为<code>createTransaction()</code>，这看起来更语义化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">createTransaction</span><span class="p">(</span><span class="nx">transaction</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 这里应该有一些校验!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 推入待处理交易数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">pendingTransactions</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">transaction</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="挖矿">挖矿</h2>
+<p>人们现在可以将新的交易添加到待处理交易的列表中。但无论如何，我们需要将他们清理掉并移入实际的区块中。为此，我们来创建一个<code>minePendingTransactions()</code>方法。这个方法不仅会挖掘所有待交易的新区块，而且还会向采矿者发送奖励。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">minePendingTransactions</span><span class="p">(</span><span class="nx">miningRewardAddress</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 用所有待交易来创建新的区块并且开挖..
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">let</span> <span class="nx">block</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Block</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span> <span class="k">this</span><span class="p">.</span><span class="nx">pendingTransactions</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">block</span><span class="p">.</span><span class="nx">mineBlock</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">difficulty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 将新挖的看矿加入到链上
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">block</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 重置待处理交易列表并且发送奖励
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">this</span><span class="p">.</span><span class="nx">pendingTransactions</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="k">new</span> <span class="nx">Transaction</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">miningRewardAddress</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">miningReward</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>请注意，该方法采用了参数<code>miningRewardAddress</code>。如果你开始挖矿，你可以将你的钱包地址传递给此方法。一旦成功挖到矿，系统将创建一个新的交易来给你挖矿奖励（在这个栗子里是100枚币）。
+有一点需要注意的是，在这个栗子中，我们将所有待处理交易一并添加到一个区块中。但实际上，由于区块的大小是有限制的，所以这是行不通的。在比特币里，一个区块的大小大概是2Mb。如果有更多的交易能够挤进一个区块，那么矿工可以选择哪些交易达成哪些交易不达成（通常情况下费用更高的交易容易获胜）。</p>
+<h2 id="地址的余额">地址的余额</h2>
+<p>在测试我们的代码钱让我们再做一件事！如果能够检查我们区块链上地址的余额将会更好。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">getBalanceOfAddress</span><span class="p">(</span><span class="nx">address</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">balance</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// you start at zero!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 遍历每个区块以及每个区块内的交易
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span><span class="p">(</span><span class="kr">const</span> <span class="nx">block</span> <span class="k">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">chain</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kr">const</span> <span class="nx">trans</span> <span class="k">of</span> <span class="nx">block</span><span class="p">.</span><span class="nx">transactions</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 如果地址是发起方 -&gt; 减少余额
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="nx">trans</span><span class="p">.</span><span class="nx">fromAddress</span> <span class="o">===</span> <span class="nx">address</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">balance</span> <span class="o">-=</span> <span class="nx">trans</span><span class="p">.</span><span class="nx">amount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 如果地址是接收方 -&gt; 增加余额
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="nx">trans</span><span class="p">.</span><span class="nx">toAddress</span> <span class="o">===</span> <span class="nx">address</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">balance</span> <span class="o">+=</span> <span class="nx">trans</span><span class="p">.</span><span class="nx">amount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">balance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="测试-1">测试</h2>
+<p>好吧，我们已经完成并可以最终一切是否可以正常工作！为此，我们创建了一些交易：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">savjeeCoin</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Blockchain</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Creating some transactions...&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">createTransaction</span><span class="p">(</span><span class="k">new</span> <span class="nx">Transaction</span><span class="p">(</span><span class="s1">&#39;address1&#39;</span><span class="p">,</span> <span class="s1">&#39;address2&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">createTransaction</span><span class="p">(</span><span class="k">new</span> <span class="nx">Transaction</span><span class="p">(</span><span class="s1">&#39;address2&#39;</span><span class="p">,</span> <span class="s1">&#39;address1&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这些交易目前都处于等待状态，为了让他们得到证实，我们必须开始挖矿：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Starting the miner...&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">minePendingTransactions</span><span class="p">(</span><span class="s1">&#39;xaviers-address&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当我们开始挖矿，我们也会传递一个我们想要获得挖矿奖励的地址。在这种情况下，我的地址是<code>xaviers-address</code>（非常复杂！）。
+之后，让我们检查一下<code>xaviers-address</code>的账户余额：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Balance of Xaviers address is&#39;</span><span class="p">,</span> <span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">getBalanceOfAddress</span><span class="p">(</span><span class="s1">&#39;xaviers-address&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输出: 0
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我的账户输出竟然是0？！等等，为什么？难道我不应该得到我的挖矿奖励么？那么，如果你仔细观察代码，你会看到系统会创建一个交易，然后将您的挖矿奖励添加为新的待处理交易。这笔交易将会包含在下一个区块中。所以如果我们再次开始挖矿，我们将收到我们的100枚硬币奖励！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Starting the miner again!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">minePendingTransactions</span><span class="p">(</span><span class="s2">&#34;xaviers-address&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Balance of Xaviers address is&#39;</span><span class="p">,</span> <span class="nx">savjeeCoin</span><span class="p">.</span><span class="nx">getBalanceOfAddress</span><span class="p">(</span><span class="s1">&#39;xaviers-address&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输出: 100
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="附录">附录</h1>
+<p>比特币：一种点对点电子货币系统
+<a class="link" href="https://bitcoin.org/bitcoin.pdf"  target="_blank" rel="noopener"
+    >https://bitcoin.org/bitcoin.pdf</a>
+<a class="link" href="https://bitcoin.org/files/bitcoin-paper/bitcoin_zh_cn.pdf"  target="_blank" rel="noopener"
+    >https://bitcoin.org/files/bitcoin-paper/bitcoin_zh_cn.pdf</a></p>
+<blockquote>
+<p>Photo by <a class="link" href="https://unsplash.com/@pawel_czerwinski"  target="_blank" rel="noopener"
+    >Pawel Czerwinski</a> on <a class="link" href="https://unsplash.com/"  target="_blank" rel="noopener"
+    >Unsplash</a></p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/example-tag/">Example Tag</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 Hugo Theme Stack Starter
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
